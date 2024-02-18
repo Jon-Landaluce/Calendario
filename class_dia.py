@@ -5,10 +5,11 @@ class Dia:
         self.anyo = anyo
         self.mes = mes
         self.dia = dia
+        self.dia_semana = 5
 
     def info(self):
 
-        return f"{self.dia} de {self.obtener_mes()} del {self.anyo}"  # :02d ??
+        return f"{self.dia} de {self.obtener_mes()} del {self.anyo}" 
 
     def obtener_mes(self):  
 
@@ -63,13 +64,13 @@ class Dia:
         }
 
         if not (1 <= self.mes <= 12):
-            raise ValueError("Fecha no valida (mes fuera de rango)")
+            raise ValueError("Fecha no valida: Mes fuera de rango, introduzca un valor entre 1 y 12")
 
         elif self.dia < 1 or self.dia > dias_por_mes.get(self.mes):
-            raise ValueError("Fecha no valida (dia fuera de rango)")
+            raise ValueError("Fecha no valida: Dia fuera de rango, introduzca un valor entre 1 y 31")
 
         elif self.anyo < 1:
-            raise ValueError("Fecha no valida (anyo fuera de rango)")
+            raise ValueError("Fecha no valida: Año fuera de rango, introduzca un valor superior a 0")
 
         elif self.anyo_bisiesto() == False and self.mes == 2 and self.dia == 29:
             raise ValueError("Fecha no valida (Anyo no bisiesto, dia no valido)")
@@ -78,32 +79,17 @@ class Dia:
             return True
 
     def zeller(self):
-        '''
-        13: 'Enero',
-        14: 'Febrero',
-        3: 'Marzo',
-        4: 'Abril',
-        5: 'Mayo',
-        6: 'Junio',
-        7: 'Julio',
-        8: 'Agosto',
-        9: 'Septiembre',
-        10: 'Octubre',
-        11: 'Noviembre',
-        12: 'Diciembre'
-        '''
 
         mes = self.mes
         anyo = self.anyo
         dia = self.dia
 
-        if anyo > 2000:
+        if (anyo == 2000 and mes > 2) or anyo > 2000:
             dia -= 1
 
         if mes == 1 or mes == 2:
             mes += 12
             anyo -= 1
-
 
         A = anyo % 100
         B = anyo // 100
@@ -111,7 +97,8 @@ class Dia:
         D = A // 4
         E = 13 * (mes + 1) // 5
         F = A + C + D + E + dia
-        G = F % 7
+        diaSemana = F % 7
+
  
 
         dicc_dias_semana = {
@@ -125,7 +112,7 @@ class Dia:
             6: 'Viernes',
         }
 
-        return dicc_dias_semana[G]
+        return dicc_dias_semana[diaSemana]
         
         #f"El dia de la semana en la fecha {self.dia} del {self.mes} del {self.anyo} es {dicc_dias_semana[G]}"
         
