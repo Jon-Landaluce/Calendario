@@ -8,7 +8,7 @@ def test_crear_fecha_valores_por_defecto():
     assert crear_fecha.dia == 1
     assert crear_fecha.mes == 1
     assert crear_fecha.anyo == 1970
-    assert crear_fecha.info() == "1 de Enero del 1970"
+    assert crear_fecha.info() == "Jueves, 1 de Enero del 1970"
 
 
 def test_crear_fecha_valores_especificos():
@@ -18,7 +18,7 @@ def test_crear_fecha_valores_especificos():
     assert crear_fecha.dia == 7
     assert crear_fecha.mes == 4
     assert crear_fecha.anyo == 1970
-    assert crear_fecha.info() == "7 de Abril del 1970"
+    assert crear_fecha.info() == "Martes, 7 de Abril del 1970"
 
 
 def test_validar_fecha_bisiesta():
@@ -92,26 +92,26 @@ def test_validar_fecha():
 def test_zeller():
 
     crear_fecha = Dia(1970, 1, 1)
-    assert crear_fecha.zeller() == 'Jueves'
+    assert crear_fecha.info() == 'Jueves, 1 de Enero del 1970'
 
     crear_fecha = Dia(1999, 1, 19)
-    assert crear_fecha.zeller() == 'Martes'
+    assert crear_fecha.info() == 'Martes, 19 de Enero del 1999'
 
     crear_fecha = Dia(2000, 3, 19)
-    assert crear_fecha.zeller() == 'Domingo'
+    assert crear_fecha.info() == 'Domingo, 19 de Marzo del 2000'
 
     crear_fecha = Dia(2022, 1, 19)
-    assert crear_fecha.zeller() == 'Miercoles'
+    assert crear_fecha.info() == 'Miercoles, 19 de Enero del 2022'
 
     # Test año bisiesto
     crear_fecha = Dia(2004, 2, 29)
-    assert crear_fecha.zeller() == 'Domingo'
+    assert crear_fecha.info() == 'Domingo, 29 de Febrero del 2004'
 
     crear_fecha = Dia(1900, 8, 25)
-    assert crear_fecha.zeller() == 'Sabado'
+    assert crear_fecha.info() == 'Sabado, 25 de Agosto del 1900'
 
     crear_fecha = Dia(2080, 3, 15)
-    assert crear_fecha.zeller() == 'Viernes'
+    assert crear_fecha.info() == 'Viernes, 15 de Marzo del 2080'
 
 
 

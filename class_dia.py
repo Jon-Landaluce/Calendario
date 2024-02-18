@@ -9,7 +9,7 @@ class Dia:
 
     def info(self):
 
-        return f"{self.dia} de {self.obtener_mes()} del {self.anyo}" 
+        return f"{self.zeller()}, {self.dia} de {self.obtener_mes()} del {self.anyo}" 
 
     def obtener_mes(self):  
 
@@ -83,6 +83,7 @@ class Dia:
         mes = self.mes
         anyo = self.anyo
         dia = self.dia
+        dia_sem = self.dia_semana
 
         if (anyo == 2000 and mes > 2) or anyo > 2000:
             dia -= 1
@@ -97,22 +98,11 @@ class Dia:
         D = A // 4
         E = 13 * (mes + 1) // 5
         F = A + C + D + E + dia
-        diaSemana = F % 7
+        dia_sem = F % 7
 
- 
+        dicc_dias_semana = {0: 'Sabado', 1: 'Domingo', 2: 'Lunes', 3: 'Martes', 4: 'Miercoles', 5: 'Jueves', 6: 'Viernes',}
 
-        dicc_dias_semana = {
-            
-            0: 'Sabado',
-            1: 'Domingo',
-            2: 'Lunes',
-            3: 'Martes',
-            4: 'Miercoles',
-            5: 'Jueves',
-            6: 'Viernes',
-        }
-
-        return dicc_dias_semana[diaSemana]
+        return dicc_dias_semana[dia_sem]
         
         #f"El dia de la semana en la fecha {self.dia} del {self.mes} del {self.anyo} es {dicc_dias_semana[G]}"
         
